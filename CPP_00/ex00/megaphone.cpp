@@ -17,11 +17,12 @@ int main(int ac, char **av)
 	{
 		while(av[x] && av[x][xx] && x < ac)
 		{
-			std::cout << (char) std::toupper(av[x][xx]);
+			std::cout << static_cast<char>(std::toupper(av[x][xx]));
 			xx++;
 		}
 		x++;
 		xx = 0;
+		std::cout << " ";
 	}
 	std::cout << std::endl;
 	return 0;

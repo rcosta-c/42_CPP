@@ -1,35 +1,21 @@
-#ifndef PHONEBOOK_HPP
-#define PHONEBOOK_HPP
+#pragma once
 
-#define MAX_CONTACTS 8;
+# include <iostream>
+# include <iomanip>
+# include <string>
+# include "contacts.hpp"
 
-
-class phonebook
+class Phonebook
 {
 	private:
-		
-		
-
-
-
+		Contact	_contact[8];
+		int		_contactcounter;
 
 	public:
-		phonebook(void);
-		~phonebook(void);
-
-		void    add(void);
-		void    search(void);
-
-		static void menu(void);
-		
-
-
+		Phonebook(void);
+		~Phonebook(void);
+	
+		void    add_contact();
+		void    search_contact();
 
 };
-
-
-
-
-
-
-#endif
