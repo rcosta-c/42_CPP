@@ -1,5 +1,5 @@
-NAME = phonebook
-SRC = main.cpp Phonebook.cpp Contacts.cpp
+NAME = ZombieHorde
+SRC = main.cpp zombieHorde.cpp Zombie.cpp
 
 CC = c++ -Wall -Wextra -Werror -std=c++98
 

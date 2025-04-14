@@ -1,5 +1,5 @@
-NAME = phonebook
-SRC = main.cpp Phonebook.cpp Contacts.cpp
+NAME = harlFilter
+SRC = main.cpp Harl.cpp
 
 CC = c++ -Wall -Wextra -Werror -std=c++98
 

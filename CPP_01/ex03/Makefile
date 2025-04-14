@@ -1,5 +1,5 @@
-NAME = phonebook
-SRC = main.cpp Phonebook.cpp Contacts.cpp
+NAME = Weapon
+SRC = Weapon.cpp HumanA.cpp HumanB.cpp main.cpp
 
 CC = c++ -Wall -Wextra -Werror -std=c++98
 
