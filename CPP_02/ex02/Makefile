@@ -6,12 +6,12 @@
 #    By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 00:32:50 by rcosta-c          #+#    #+#              #
-#    Updated: 2025/04/15 00:32:51 by rcosta-c         ###   ########.fr        #
+#    Updated: 2025/04/15 23:13:30 by rcosta-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = a.out
-SRC = main.cpp Harl.cpp
+SRC = main.cpp Fixed.cpp
 
 CC = c++ -Wall -Wextra -Werror -std=c++98
 
