@@ -6,7 +6,7 @@
 /*   By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:09:05 by rcosta-c          #+#    #+#             */
-/*   Updated: 2025/04/18 00:09:06 by rcosta-c         ###   ########.fr       */
+/*   Updated: 2025/04/19 23:56:28 by rcosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,21 @@ Cat::Cat() : Animal()
 Cat::Cat(const Cat &copy) : Animal(copy)
 {
     std::cout << "Cat : Copy constructor called" << std::endl;
+    _brain = new Brain();
     *this = copy;
 }
 
 Cat::Cat(std::string &type) : Animal(type)
 {
     std::cout << "Cat : Constructor with type called" << std::endl;
+    _brain = new Brain();
     this->_type = type;
 }
 
 Cat::~Cat()
 {
     std::cout << "Cat : Destructor called" << std::endl;
+    delete this->_brain;
 }
 
 Cat &Cat::operator=(const Cat &copy)

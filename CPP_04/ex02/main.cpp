@@ -6,7 +6,7 @@
 /*   By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:10:12 by rcosta-c          #+#    #+#             */
-/*   Updated: 2025/04/18 00:10:13 by rcosta-c         ###   ########.fr       */
+/*   Updated: 2025/04/20 00:15:57 by rcosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 int main()
 {
-    std::cout << "\n----- Basic Array Test -----\n" << std::endl;
+    std::cout << std::endl << "----- Basic Array Test -----\n" << std::endl;
     
     // Create array of AAnimals as required by the subject
     AAnimal* animals[10];
@@ -72,7 +72,7 @@ int main()
     Cat copyCat = originalCat;
     
     // Show that they have the same idea initially
-    std::cout << "\nOriginal Cat idea: " << originalCat.getBrain()->getIdea(0) << std::endl;
+    std::cout << std::endl << "Original Cat idea: " << originalCat.getBrain()->getIdea(0) << std::endl;
     std::cout << "Copy Cat idea: " << copyCat.getBrain()->getIdea(0) << std::endl;
     
     // Modify the original to prove deep copy
@@ -81,6 +81,33 @@ int main()
     std::cout << "After modification:" << std::endl;
     std::cout << "Original Cat idea: " << originalCat.getBrain()->getIdea(0) << std::endl;
     std::cout << "Copy Cat idea: " << copyCat.getBrain()->getIdea(0) << std::endl;
+    
+    std::cout  << std::endl << "----- WrongAnimal Polymorphism Test -----\n" << std::endl;
+    
+    // Demonstrating the difference between correct and wrong implementation
+    AAnimal* animal = new Cat();
+    WrongAnimal* wrongAnimal = new WrongCat();
+    
+    std::cout << "Correct implementation:" << std::endl;
+    std::cout << "animal->getType(): " << animal->getType() << std::endl;
+    std::cout << "animal->makeSound(): ";
+    animal->makeSound();  // This will call Cat::makeSound() due to virtual function
+    
+    std::cout << std::endl << "Wrong implementation:" << std::endl;
+    std::cout << "wrongAnimal->getType(): " << wrongAnimal->getType() << std::endl;
+    std::cout << "wrongAnimal->makeSound(): ";
+    wrongAnimal->makeSound();  // This will call WrongAnimal::makeSound() because it's not virtual
+    
+    // Also demonstrate with direct objects
+    std::cout << std::endl << "Direct objects:" << std::endl;
+    WrongCat wrongCat;
+    std::cout << "wrongCat.getType(): " << wrongCat.getType() << std::endl;
+    std::cout << "wrongCat.makeSound(): ";
+    wrongCat.makeSound();  // This will call WrongCat::makeSound() as expected
+    
+    // Clean up the test objects
+    delete animal;
+    delete wrongAnimal;
     
     std::cout << "\n----- Delete Animals -----\n" << std::endl;
     

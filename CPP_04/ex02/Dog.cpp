@@ -6,7 +6,7 @@
 /*   By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:10:05 by rcosta-c          #+#    #+#             */
-/*   Updated: 2025/04/18 00:10:06 by rcosta-c         ###   ########.fr       */
+/*   Updated: 2025/04/19 23:59:05 by rcosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,21 @@ Dog::Dog() : AAnimal()
 Dog::Dog(const Dog &copy) : AAnimal(copy)
 {
     std::cout << "Dog : Copy constructor called" << std::endl;
+    _brain = new Brain();
     *this = copy;
 }
 
 Dog::Dog(std::string &type) : AAnimal(type)
 {
     std::cout << "Dog : Constructor with type called" << std::endl;
+    _brain = new Brain();
     this->_type = type;
 }
 
 Dog::~Dog()
 {
     std::cout << "Dog : Destructor called" << std::endl;
+    delete this->_brain;
 }
 
 Dog &Dog::operator=(const Dog &copy)
