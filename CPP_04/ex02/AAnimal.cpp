@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AAnimal.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: rcosta-c <rcosta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 00:09:37 by rcosta-c          #+#    #+#             */
-/*   Updated: 2025/04/22 11:39:09 by rcosta-c         ###   ########.fr       */
+/*   Updated: 2025/04/23 11:23:15 by rcosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,9 @@ AAnimal &AAnimal::operator=(const AAnimal &copy)
         this->_type = copy._type;
     }
     return *this;
+}
+
+std::string AAnimal::getType() const
+{
+    return this->_type;
 }

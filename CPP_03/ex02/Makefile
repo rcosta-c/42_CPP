@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+         #
+#    By: rcosta-c <rcosta-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 00:32:50 by rcosta-c          #+#    #+#              #
-#    Updated: 2025/04/17 11:15:37 by rcosta-c         ###   ########.fr        #
+#    Updated: 2025/04/19 11:20:00 by rcosta-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ScavTrap
+NAME = FragTrap
 SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 
 CC = c++ -Wall -Wextra -Werror -std=c++98
