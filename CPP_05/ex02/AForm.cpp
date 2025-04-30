@@ -62,7 +62,7 @@ void AForm::beSigned(Bureaucrat &bureaucrat)
     _isSigned = true;
 }
 
-void AForm::beExecuted(Bureaucrat const &bureaucrat) const
+void AForm::beExecuted(Bureaucrat &bureaucrat) const
 {
     if (bureaucrat.getGrade() > this->_gradeToExecute)
         throw AForm::GradeTooLowException();
