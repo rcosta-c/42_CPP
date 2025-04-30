@@ -10,7 +10,8 @@
  * It also includes exception classes for handling grade-related errors.
  */
 
- /* * Form class
+
+ /*	* AForm class
  * This class represents a form that can be signed by a bureaucrat.
  * The form has a name, a signing grade, and an execution grade.
  * The form can be signed by a bureaucrat if the bureaucrat's grade is
@@ -19,8 +20,6 @@
  * execution grade, and whether the form is signed or not.
  * It also includes exception classes for handling grade-related errors.
  * The class provides a method to sign the form by a bureaucrat.
- * If the bureaucrat's grade is too low, an exception is thrown.
- * The class also provides a method to execute the form by a bureaucrat.
  * If the bureaucrat's grade is too low, an exception is thrown.
  * The class also provides a method to execute the form by a bureaucrat.
  * If the bureaucrat's grade is too low, an exception is thrown.
