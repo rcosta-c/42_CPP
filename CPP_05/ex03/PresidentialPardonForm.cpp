@@ -12,7 +12,7 @@ PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("Pres
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &copy) : AForm(copy), _target(copy._target)
 {
-    std::cout << "Presidential: Copy constructor called" << std::endl;
+    std::cout << "Presidential: opy constructor called" << std::endl;
 }
 
 PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &copy)

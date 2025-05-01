@@ -12,6 +12,12 @@ class PresidentialPardonForm : public AForm
 
         std::string getTarget() const;
         void execute(Bureaucrat const &executor) const;
+
+        static AForm *createPresidentialPardonForm(std::string const &target)
+        {
+            return new PresidentialPardonForm(target);
+        }
+
     private:
         std::string _target;
 };

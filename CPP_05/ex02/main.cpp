@@ -1,5 +1,8 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 /* * Bureaucrat class
  * This class represents a bureaucrat with a name and a grade.
@@ -25,48 +28,53 @@
  * If the bureaucrat's grade is too low, an exception is thrown.
  */
 
+
  int main()
-{
-	{
-		std::cout << "Test 1" << std::endl;
-		Bureaucrat *bureaucrat = new Bureaucrat("Light", 150);
-		std::cout << *bureaucrat << std::endl;
-		Form *form = new Form();
-		std::cout << *form << std::endl;
-		form->beSigned(*bureaucrat);
-		std::cout << *form << std::endl;
-		delete form;
-		delete bureaucrat;
-		std::cout << std::endl;
-	}
-	{
-		std::cout << "Test 2" << std::endl;
-		Bureaucrat *b1 = new Bureaucrat("Black", 150);
-		Bureaucrat *b2 = new Bureaucrat("Start", 1);
-		std::cout << *b1 << std::endl;
-		std::cout << *b2 << std::endl;
-		Form *form = new Form("Form", 1, 1);
-		std::cout << *form << std::endl;
-		try
-		{
-			form->beSigned(*b1);
-		}
-		catch(const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-		}
-		try
-		{
-			form->beSigned(*b2);
-		}
-		catch(const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-		}
-		
-		std::cout << *form << std::endl;
-		delete form;
-		delete b1;
-		delete b2;
-	}
-}
+ {
+	 {
+		 std::cout << "Test 1" << std::endl;
+		 std::cout << "Failed Tests" << std::endl;
+		 Bureaucrat *bureaucrat = new Bureaucrat("Abilio", 150);
+		 std::cout << *bureaucrat << std::endl;
+		 ShrubberyCreationForm *shrubbery = new ShrubberyCreationForm("Home");
+		 std::cout << *shrubbery << std::endl;
+		 bureaucrat->signForm(*shrubbery);
+		 bureaucrat->executeForm(*shrubbery);
+		 RobotomyRequestForm *robotomy = new RobotomyRequestForm("Home");
+		 std::cout << *robotomy << std::endl;
+		 bureaucrat->signForm(*robotomy);
+		 bureaucrat->executeForm(*robotomy);
+		 PresidentialPardonForm *presidential = new PresidentialPardonForm("Home");
+		 std::cout << *presidential << std::endl;
+		 bureaucrat->signForm(*presidential);
+		 bureaucrat->executeForm(*presidential);
+		 delete bureaucrat;
+		 delete shrubbery;
+		 delete robotomy;
+		 delete presidential;
+		 std::cout << std::endl;
+	 }
+	 {
+		 std::cout << "------Test 2------" << std::endl;
+		 std::cout << "------Sucessuful Test------" << std::endl;
+		 Bureaucrat *bureaucrat = new Bureaucrat("Abilio", 1);
+		 std::cout << *bureaucrat << std::endl;
+		 ShrubberyCreationForm *shrubbery = new ShrubberyCreationForm("Home");
+		 std::cout << *shrubbery << std::endl;
+		 bureaucrat->signForm(*shrubbery);
+		 bureaucrat->executeForm(*shrubbery);
+		 RobotomyRequestForm *robotomy = new RobotomyRequestForm("Robocop");
+		 std::cout << *robotomy << std::endl;
+		 bureaucrat->signForm(*robotomy);
+		 bureaucrat->executeForm(*robotomy); //50% chance of success
+		 PresidentialPardonForm *presidential = new PresidentialPardonForm("Emilio");
+		 std::cout << *presidential << std::endl;
+		 bureaucrat->signForm(*presidential);
+		 bureaucrat->executeForm(*presidential);
+		 delete bureaucrat;
+		 delete shrubbery;
+		 delete robotomy;
+		 delete presidential;
+		 std::cout << std::endl;
+	 }
+ }

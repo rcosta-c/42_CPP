@@ -61,6 +61,12 @@ class AForm
 				virtual const char* what() const throw();
 		};
 
+        class FormCreationException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
+        
     protected:
         AForm(void);
         AForm(std::string name, int gradeToSign, int gradeToExecute);

@@ -12,9 +12,14 @@ class ShrubberyCreationForm : public AForm
 
         std::string getTarget() const;
         void execute(Bureaucrat const &executor) const;
+
+        static AForm *createShrubberyCreationForm(std::string const &target)
+        {
+            return new ShrubberyCreationForm(target);
+        }
+
     private:
         std::string _target;
-     //   ShrubberyCreationForm();
 };
 
 std::ostream &operator<<(std::ostream &out, ShrubberyCreationForm &form);

@@ -3,7 +3,7 @@
 
 AForm::AForm() : _name("Default"), _gradeToSign(150), _gradeToExecute(150), _isSigned(false)
 {
-    std::cout << "AForm: Default constructor called" << std::endl;
+    std::cout << "Aform: Default constructor called" << std::endl;
 }
 
 AForm::AForm(std::string name, int gradeSign, int gradeExecute) : 
@@ -13,12 +13,12 @@ AForm::AForm(std::string name, int gradeSign, int gradeExecute) :
         throw AForm::GradeTooHighException();
     else if (gradeSign > 150 || gradeExecute > 150)
         throw AForm::GradeTooLowException();
-    std::cout << "AForm: Constructor called" << std::endl;
+    std::cout << "Aform: Constructor called" << std::endl;
 }
 
 AForm::AForm(const AForm &copy) : _name(copy._name), _gradeToSign(copy._gradeToSign), _gradeToExecute(copy._gradeToExecute)
 {
-    std::cout << "AForm: Copy constructor called" << std::endl;
+    std::cout << "Aform: Copy constructor called" << std::endl;
 }
 
 AForm &AForm::operator=(const AForm &copy)
@@ -26,14 +26,14 @@ AForm &AForm::operator=(const AForm &copy)
     if (this != &copy)
     {
         _isSigned = copy._isSigned;
-        std::cout << "AForm: Assignment operator called" << std::endl;
+        std::cout << "Aform: Assignment operator called" << std::endl;
     }
     return *this;
 }
 
 AForm::~AForm()
 {
-    std::cout << "AForm: Destructor called" << std::endl;
+    std::cout << "Aform: Destructor called" << std::endl;
 }
 
 std::string AForm::getName() const
@@ -88,4 +88,9 @@ const char* AForm::FormNotSignedException::what() const throw()
 const char* AForm::FileNotOpenedException::what() const throw()
 {
     return ("Could not open file");
+}
+
+const char* AForm::FormCreationException::what() const throw()
+{
+    return ("Form creation failed");
 }
