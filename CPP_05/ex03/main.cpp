@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/02 23:41:29 by rcosta-c          #+#    #+#             */
+/*   Updated: 2025/05/02 23:41:43 by rcosta-c         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "RobotomyRequestForm.hpp"
@@ -5,92 +17,104 @@
 #include "ShrubberyCreationForm.hpp"
 #include "Intern.hpp"
 
-/* * Bureaucrat class
- * This class represents a bureaucrat with a name and a grade.
- * The grade is an integer value that determines the bureaucrat's level of authority.
- * The higher the grade, the lower the authority.
- * The class provides methods to get the bureaucrat's name and grade,
- * as well as methods to increase or decrease the grade.
- * It also includes exception classes for handling grade-related errors.
- */
+void printHeader(const std::string& title) {
+    std::cout << "\n";
+    std::cout << "===================================================" << std::endl;
+    std::cout << "=== " << title << " ===" << std::endl;
+    std::cout << "===================================================" << std::endl;
+}
+
+void testInternBasic() {
+    printHeader("TEST INTERN BASIC FUNCTIONALITY");
+    
+    Intern someRandomIntern;
+    AForm *rrf = NULL;
+    AForm *random = NULL;
+    
+    std::cout << "Creating a robotomy request form..." << std::endl;
+    rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+    if (rrf) {
+        std::cout << *rrf << std::endl;
+    }
+    
+    std::cout << "\nTrying to create an invalid form type..." << std::endl;
+    try {
+        random = someRandomIntern.makeForm("random", "Bender");
+        if (random) {
+            std::cout << *random << std::endl;
+        }
+    } catch(const std::exception& e) {
+        std::cout << "Exception caught: " << e.what() << std::endl;
+    }
+    
+    std::cout << "\nTesting form with bureaucrats..." << std::endl;
+    Bureaucrat lowLevel("LowLevel", 150);
+    std::cout << lowLevel << std::endl;
+    
+    if (rrf) {
+        lowLevel.signForm(*rrf);
+        
+        Bureaucrat midLevel("MidLevel", 40);
+        std::cout << midLevel << std::endl;
+        
+        midLevel.signForm(*rrf);
+        midLevel.executeForm(*rrf);
+        
+        delete rrf;
+    }
+}
+
+void testInternAllForms() {
+    printHeader("TEST INTERN ALL FORM TYPES");
+    
+    Intern someRandomIntern;
+    AForm *rrf = NULL;
+    AForm *scf = NULL;
+    AForm *ppf = NULL;
+    
+    std::cout << "Creating all types of forms..." << std::endl;
+    rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+    scf = someRandomIntern.makeForm("shrubbery creation", "Garden");
+    ppf = someRandomIntern.makeForm("presidential pardon", "Criminal");
+    
+    if (rrf && scf && ppf) {
+        std::cout << "\nForms created:" << std::endl;
+        std::cout << *rrf << std::endl;
+        std::cout << *scf << std::endl;
+        std::cout << *ppf << std::endl;
+        
+        std::cout << "\nTesting with bureaucrats..." << std::endl;
+        Bureaucrat lowLevel("LowLevel", 150);
+        std::cout << lowLevel << std::endl;
+        
+        lowLevel.signForm(*rrf);
+        lowLevel.signForm(*scf);
+        lowLevel.signForm(*ppf);
+        
+        Bureaucrat highLevel("HighLevel", 5);
+        std::cout << highLevel << std::endl;
+        
+        highLevel.signForm(*rrf);
+        highLevel.signForm(*scf);
+        highLevel.signForm(*ppf);
+        
+        highLevel.executeForm(*rrf);
+        highLevel.executeForm(*scf);
+        highLevel.executeForm(*ppf);
+        
+        delete rrf;
+        delete scf;
+        delete ppf;
+    }
+}
 
 
- /*	* AForm class
- * This class represents a form that can be signed by a bureaucrat.
- * The form has a name, a signing grade, and an execution grade.
- * The form can be signed by a bureaucrat if the bureaucrat's grade is
- * equal to or higher than the form's signing grade.
- * The class provides methods to get the form's name, signing grade,
- * execution grade, and whether the form is signed or not.
- * It also includes exception classes for handling grade-related errors.
- * The class provides a method to sign the form by a bureaucrat.
- * If the bureaucrat's grade is too low, an exception is thrown.
- * The class also provides a method to execute the form by a bureaucrat.
- * If the bureaucrat's grade is too low, an exception is thrown.
- */
-
-
- int main()
-{
-	{
-		std::cout << "---Test 1---" << std::endl;
-		Intern someRandomIntern;
-		AForm *rrf;
-		AForm *random;
-		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-		std::cout << *rrf << std::endl;
-		try
-		{
-			random = someRandomIntern.makeForm("random", "Bender");
-			std::cout << *random << std::endl;
-		}
-		catch(const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-		}
-		
-		Bureaucrat *b1 = new Bureaucrat("Bureaucrat 1", 150);
-		std::cout << *b1 << std::endl;
-		b1->signForm(*rrf);
-		Bureaucrat *b2 = new Bureaucrat("Bureaucrat 2", 50);
-		std::cout << *b2 << std::endl;
-		b2->signForm(*rrf);
-		b2->executeForm(*rrf);
-		delete b1;
-		delete b2;
-		delete rrf;
-		std::cout << std::endl;
-	}
-	{
-		std::cout << std::endl;
-		std::cout << "---Test 2---" << std::endl;
-		Intern someRandomIntern;
-		AForm *rrf;
-		AForm *scf;
-		AForm *ppf;
-		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-		scf = someRandomIntern.makeForm("shrubbery creation", "Bender");
-		ppf = someRandomIntern.makeForm("presidential pardon", "Bender");
-		std::cout << *rrf << std::endl;
-		std::cout << *scf << std::endl;
-		std::cout << *ppf << std::endl;
-		Bureaucrat *b1 = new Bureaucrat("Bureaucrat 1", 150);
-		std::cout << *b1 << std::endl;
-		b1->signForm(*rrf);
-		b1->signForm(*scf);
-		b1->signForm(*ppf);
-		Bureaucrat *b2 = new Bureaucrat("Bureaucrat 2", 5);
-		std::cout << *b2 << std::endl;
-		b2->signForm(*rrf);
-		b2->signForm(*scf);
-		b2->signForm(*ppf);
-		b2->executeForm(*rrf);
-		b2->executeForm(*scf);
-		b2->executeForm(*ppf);
-		delete b1;
-		delete b2;
-		delete rrf;
-		delete scf;
-		delete ppf;
-	}
+int main() {
+    // Test basic intern functionality
+    testInternBasic();
+    
+    // Test intern with all form types
+    testInternAllForms();
+    
+    return 0;
 }

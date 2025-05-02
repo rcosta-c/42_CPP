@@ -1,68 +1,170 @@
 #include "Bureaucrat.hpp"
 
+#include <iostream>
+#include <string>
+#include "Bureaucrat.hpp"
+
+void printHeader(const std::string& title) {
+    std::cout << "\n";
+    std::cout << "===================================================" << std::endl;
+    std::cout << "=== " << title << " ===" << std::endl;
+    std::cout << "===================================================" << std::endl;
+}
+
+void testConstructor()
+{
+    printHeader("CONSTRUCTOR TESTS");
+    
+    std::cout << "Testing valid constructor:" << std::endl;
+    try
+	{
+        Bureaucrat normal("Normal", 75);
+        std::cout << normal << std::endl;
+    }
+	catch (std::exception& e)
+	{
+        std::cout << "Exception caught: " << e.what() << std::endl;
+    }
+    
+    std::cout << "\nTesting too high grade (0):" << std::endl;
+    try
+	{
+        Bureaucrat tooHigh("TooHigh", 0);
+        std::cout << tooHigh << std::endl;
+    }
+	catch (std::exception& e)
+	{
+        std::cout << "Exception caught: " << e.what() << std::endl;
+    }
+    
+    std::cout << "\nTesting too low grade (151):" << std::endl;
+    try
+	{
+        Bureaucrat tooLow("TooLow", 151);
+        std::cout << tooLow << std::endl;
+    }
+	catch (std::exception& e)
+	{
+        std::cout << "Exception caught: " << e.what() << std::endl;
+    }
+}
+
+void testIncrementDecrement()
+{
+    printHeader("INCREMENT/DECREMENT TESTS");
+    
+    std::cout << "Testing normal increment/decrement:" << std::endl;
+    try
+	{
+        Bureaucrat normal("Normal", 75);
+        std::cout << "Initial: " << normal << std::endl;
+        
+        normal.gradeUp();
+        std::cout << "After increment: " << normal << std::endl;
+        
+        normal.gradeDown();
+        std::cout << "After decrement: " << normal << std::endl;
+    }
+	catch (std::exception& e)
+	{
+        std::cout << "Exception caught: " << e.what() << std::endl;
+    }
+    
+    std::cout << "\nTesting increment at highest grade (1):" << std::endl;
+    try
+	{
+        Bureaucrat highest("Highest", 1);
+        std::cout << "Initial: " << highest << std::endl;
+        
+        highest.gradeUp();
+        std::cout << "After increment: " << highest << std::endl;
+    }
+	catch (std::exception& e)
+	{
+        std::cout << "Exception caught: " << e.what() << std::endl;
+    }
+    
+    std::cout << "\nTesting decrement at lowest grade (150):" << std::endl;
+    try
+	{
+        Bureaucrat lowest("Lowest", 150);
+        std::cout << "Initial: " << lowest << std::endl;
+        
+        lowest.gradeDown();
+        std::cout << "After decrement: " << lowest << std::endl;
+    }
+	catch (std::exception& e)
+	{
+        std::cout << "Exception caught: " << e.what() << std::endl;
+    }
+}
+
+void testGetters()
+{
+    printHeader("GETTER TESTS");
+    
+    Bureaucrat bureaucrat("TestBureaucrat", 42);
+    
+    std::cout << "Full info: " << bureaucrat << std::endl;
+    std::cout << "Name: " << bureaucrat.getName() << std::endl;
+    std::cout << "Grade: " << bureaucrat.getGrade() << std::endl;
+}
+
+void testMultipleChanges()
+{
+    printHeader("MULTIPLE CHANGES TEST");
+    
+    try
+	{
+        Bureaucrat b("RiseFall", 75);
+        std::cout << "Initial: " << b << std::endl;
+        
+        std::cout << "\nPromoting 10 times:" << std::endl;
+        for (int i = 0; i < 10; i++)
+		{
+            b.gradeUp();
+            std::cout << "After promotion " << i + 1 << ": " << b << std::endl;
+        }
+        
+        std::cout << "\nDemoting 15 times:" << std::endl;
+        for (int i = 0; i < 15; i++)
+		{
+            b.gradeDown();
+            std::cout << "After demotion " << i + 1 << ": " << b << std::endl;
+        }
+        
+        // This should cause an exception (would reach 151 if allowed)
+        std::cout << "\nTrying to demote too far:" << std::endl;
+        for (int i = b.getGrade(); i < 150; i++)
+		{
+            b.gradeDown();
+            std::cout << "Current grade: " << b.getGrade() << std::endl;
+        }
+        
+        b.gradeDown(); // This should throw exception
+        
+    }
+	catch (std::exception& e)
+	{
+        std::cout << "Exception caught: " << e.what() << std::endl;
+    }
+}
+
 int main()
 {
-	{
-		std::cout << "Test" << std::endl;
-		Bureaucrat *bureaucrat = new Bureaucrat("Blackout", 150);
-		std::cout << *bureaucrat << std::endl;
-		bureaucrat->gradeUp();
-		std::cout << *bureaucrat << std::endl;
-		delete bureaucrat;
-		std::cout << std::endl;
-	}
-	{
-		std::cout << "Test" << std::endl;
-		Bureaucrat *bureaucrat = new Bureaucrat("Blackstart", 1);
-		std::cout << *bureaucrat << std::endl;
-		bureaucrat->gradeDown();
-		std::cout << *bureaucrat << std::endl;
-		delete bureaucrat;
-		std::cout << std::endl;
-	}
-	{
-		std::cout << "Test" << std::endl;
-		Bureaucrat *bureaucrat1 = new Bureaucrat("Blackout", 150);
-		Bureaucrat *bureaucrat2 = new Bureaucrat("Blackstart", 1);
-		std::cout << *bureaucrat1 << std::endl;
-		std::cout << *bureaucrat2 << std::endl;
-		try
-		{
-			bureaucrat1->gradeDown();
-		}
-		catch(const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-		}
-		try
-		{
-			bureaucrat2->gradeUp();	
-		}
-		catch(const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-		}
-		delete bureaucrat1;
-		delete bureaucrat2;
-		std::cout << std::endl;
-	}
-	{
-		std::cout << "Test" << std::endl;
-		Bureaucrat *bureaucrat99 = new Bureaucrat("Electricity", 150);
-		while(1)
-		{
-			try
-			{
-				bureaucrat99->gradeUp();
-			}
-			catch (std::exception &e)
-			{
-				std::cout << e.what() << std::endl;
-				return 1;
-			}
-		}
-		delete bureaucrat99;
-		std::cout << std::endl;
-	}
-	return (0);
+    std::cout << "TESTING BUREAUCRAT CLASS" << std::endl;
+    
+    // Test constructors with various grades
+    testConstructor();
+    
+    // Test increment and decrement functions
+    testIncrementDecrement();
+    
+    // Test getters
+    testGetters();
+    
+    // Test multiple promotions and demotions
+    testMultipleChanges();
+    
+    return 0;
 }
