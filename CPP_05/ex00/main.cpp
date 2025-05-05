@@ -1,7 +1,15 @@
-#include "Bureaucrat.hpp"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/05 10:38:37 by rcosta-c          #+#    #+#             */
+/*   Updated: 2025/05/05 10:38:47 by rcosta-c         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <iostream>
-#include <string>
 #include "Bureaucrat.hpp"
 
 void printHeader(const std::string& title) {
