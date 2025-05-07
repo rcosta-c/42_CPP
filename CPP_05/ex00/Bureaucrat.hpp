@@ -6,7 +6,7 @@
 /*   By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 10:38:56 by rcosta-c          #+#    #+#             */
-/*   Updated: 2025/05/05 10:38:57 by rcosta-c         ###   ########.fr       */
+/*   Updated: 2025/05/07 12:24:46 by rcosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class Bureaucrat
 		Bureaucrat &operator=(const Bureaucrat &copy);
 		~Bureaucrat();
 	
-		/*getters and setters*/
+		/*getters*/
 		std::string	getName();
 		int			getGrade();
 
