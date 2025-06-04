@@ -12,10 +12,20 @@
 
 #include "includes/easyfind.hpp"
 
+void signal_handler(int signal)
+{
+    if (signal == SIGINT)
+    {
+        std::cout << std::endl << "Bye!!!" << std::endl;
+        exit(1);
+    }
+}
+
 int main(void)
 {
     std::vector<int> container;
     int nbr, x, numbers;
+    std::signal(SIGINT, signal_handler);
 
     std::cout << "Hello! Find a number in vector!" << std::endl << std::endl;
     std::cout << "How many numbers you want write in Vector?" << std::endl;

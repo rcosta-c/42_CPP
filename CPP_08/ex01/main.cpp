@@ -3,17 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: rcosta-c <rcosta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 23:30:39 by rcosta-c          #+#    #+#             */
-/*   Updated: 2025/06/01 23:30:40 by rcosta-c         ###   ########.fr       */
+/*   Updated: 2025/06/04 12:30:10 by rcosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/Span.hpp"
 
+void signal_handler(int signal)
+{
+    if (signal == SIGINT)
+	{
+        std::cout << std::endl << "Bye!!!" << std::endl;
+		exit(1);
+    }
+}
+
 int main(void)
 {
+	std::signal(SIGINT, signal_handler);
 	std::cout << "Hello! Find the shortspan and longspan in a vector!" << std::endl;
 	std::cout << "numbers = 1, 3, 9, 11, 19" << std::endl;
 	Span sp1 = Span(5);
@@ -24,7 +34,11 @@ int main(void)
 	sp1.addnbr(19);
 	std::cout << "Shortest Span is: " << sp1.shrtspan() << std::endl;
 	std::cout << "Longest Span is:" << sp1.lngspan() << std::endl << std::endl;
-		
+
+
+
+
+	
 	std::cout << "Hello! Find the shortspan and longspan in a vector!" << std::endl;
 	std::cout << "How many numbers? (randomly selected)" << std::endl;
 	unsigned int maxnumbers;

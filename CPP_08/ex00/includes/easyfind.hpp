@@ -18,6 +18,9 @@
 #include <stdexcept>
 #include <iterator>
 #include <exception>
+#include <csignal>
+
+
 
 class NotInVectorExcep : public std::exception
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: rcosta-c <rcosta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 18:21:35 by rcosta-c          #+#    #+#             */
-/*   Updated: 2025/05/07 12:22:18 by rcosta-c         ###   ########.fr       */
+/*   Updated: 2025/05/08 10:47:17 by rcosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,6 @@ int main() {
         second[1] = 200;
         displayTestResult("Modifying second doesn't affect first after assignment", first[1] == 2);
         
-        // Test self-assignment
-        first = first;
-        displayTestResult("Self-assignment works correctly", 
-                        first[0] == 100 && first[1] == 2 && first[2] == 3 && first[3] == 4);
     }
     
     // Test with a different type

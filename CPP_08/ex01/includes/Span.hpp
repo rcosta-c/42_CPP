@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: rcosta-c <rcosta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 23:30:36 by rcosta-c          #+#    #+#             */
-/*   Updated: 2025/06/01 23:30:37 by rcosta-c         ###   ########.fr       */
+/*   Updated: 2025/06/04 13:09:08 by rcosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <algorithm>
 #include <vector>
 #include <iostream>
+#include <csignal>
 
 class Span
 {
@@ -28,6 +29,10 @@ class Span
         void addnbr(int x);
         int shrtspan();
         int lngspan();
+        static void testWithRandomNumbers();
+       
+        template<typename Iterator>
+        void addNumbers(Iterator begin, Iterator end);
 
     private:
         unsigned int   _nbrLimit;

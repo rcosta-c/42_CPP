@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+         #
+#    By: rcosta-c <rcosta-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 00:32:50 by rcosta-c          #+#    #+#              #
-#    Updated: 2025/05/05 22:00:23 by rcosta-c         ###   ########.fr        #
+#    Updated: 2025/05/08 10:49:35 by rcosta-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Base
+NAME = base
 SRC = main.cpp Base.cpp
 
 CC = c++ -Wall -Wextra -Werror -std=c++98

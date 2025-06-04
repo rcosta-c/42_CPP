@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: rcosta-c <rcosta-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 23:30:55 by rcosta-c          #+#    #+#             */
-/*   Updated: 2025/06/02 23:27:59 by rcosta-c         ###   ########.fr       */
+/*   Updated: 2025/06/04 12:24:51 by rcosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,32 @@ int main(void)
         ++it;
     }
     std::stack<int> s(mstack);
+
+    std::cout << "- Testes Adicionais -" << std::endl << std::endl;
+    std::cout << "Teste stack vazia:" << std::endl;
+    MutantStack<int> empty;
+    std::cout << "Size: " << empty.size() << std::endl;
+    std::cout << "Empty: " << (empty.empty() ? "true" : "false") << std::endl << std::endl;
+    
+    std::cout << "Teste com strings:" << std::endl;
+    MutantStack<std::string> str_stack;
+    str_stack.push("hello");
+    str_stack.push("world");
+    str_stack.push("42");
+    std::cout << "Top: " << str_stack.top() << std::endl << std::endl;
+    for (MutantStack<std::string>::iterator it = str_stack.begin(); it != str_stack.end(); ++it)
+    {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl << std::endl;
+    
+    std::cout << "Teste cópia:" << std::endl;
+    MutantStack<int> original;
+    original.push(10);
+    original.push(20);
+    original.push(30);
+    MutantStack<int> copy(original);
+    std::cout << "Original size: " << original.size() << std::endl;
+    std::cout << "Copy size: " << copy.size() << std::endl;
     return 0;
 }
