@@ -6,7 +6,7 @@
 /*   By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:47:55 by rcosta-c          #+#    #+#             */
-/*   Updated: 2025/06/03 15:00:04 by rcosta-c         ###   ########.fr       */
+/*   Updated: 2025/06/05 00:11:00 by rcosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,49 +28,128 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &copy)
         _vecTime = copy._vecTime;
         _deqTime = copy._deqTime;
     }
-        *this= copy;
     return(*this);
 }
 
 PmergeMe::~PmergeMe()
 {}
 
-void PmergeMe::insertIntoSorted(std::vector<int>& sorted, int value)
+
+void PmergeMe::vecBinaryInsert(std::vector<int>& arr, int left, int right, int value)
 {
-    std::vector<int>::iterator pos = std::lower_bound(sorted.begin(), sorted.end(), value);
-    sorted.insert(pos, value);
+    std::vector<int>::iterator pos = std::lower_bound(arr.begin() + left, arr.begin() + right, value);
+    arr.insert(pos, value);
 }
 
-void PmergeMe::insertIntoSorted(std::deque<int>& sorted, int value)
+void PmergeMe::vecMergeInsert(std::vector<int>& arr, int left, int mid, int right)
 {
-    std::deque<int>::iterator pos = std::lower_bound(sorted.begin(), sorted.end(), value);
-    sorted.insert(pos, value);
+    std::vector<int> temp;
+    int i = left;
+    int j = mid + 1;
+    
+    while (i <= mid && j <= right)
+    {
+        if (arr[i] <= arr[j])
+            temp.push_back(arr[i++]);
+        else
+            temp.push_back(arr[j++]);
+    }
+    while (i <= mid)
+        temp.push_back(arr[i++]);
+    while (j <= right)
+        temp.push_back(arr[j++]);
+    for (size_t k = 0; k < temp.size(); ++k)
+        arr[left + k] = temp[k];
 }
 
-void PmergeMe::mergeInsertSort(std::vector<int>& arr)
+void PmergeMe::vecFordJohnsonRecursive(std::vector<int>& arr, int left, int right)
+{
+    if (right - left <= 16)
+    {
+        for (int i = left + 1; i <= right; ++i)
+        {
+            int key = arr[i];
+            int j = i - 1;
+            while (j >= left && arr[j] > key)
+            {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = key;
+        }
+        return;
+    }
+    
+    int mid = left + (right - left) / 2;
+    vecFordJohnsonRecursive(arr, left, mid);
+    vecFordJohnsonRecursive(arr, mid + 1, right);
+    vecMergeInsert(arr, left, mid, right);
+}
+
+void PmergeMe::vecFordJohnsonSort(std::vector<int>& arr)
 {
     if (arr.size() <= 1) return;
-    
-    std::vector<int> sorted;
-    sorted.push_back(arr[0]);
-    for (size_t i = 1; i < arr.size(); ++i)
-    {
-        insertIntoSorted(sorted, arr[i]);
-    }
-    arr = sorted;
+    vecFordJohnsonRecursive(arr, 0, arr.size() - 1);
 }
 
-void PmergeMe::mergeInsertSort(std::deque<int>& arr)
+
+
+void PmergeMe::deqBinaryInsert(std::deque<int>& arr, int left, int right, int value)
+{
+    std::deque<int>::iterator pos = std::lower_bound(arr.begin() + left, arr.begin() + right, value);
+    arr.insert(pos, value);
+}
+
+void PmergeMe::deqMergeInsert(std::deque<int>& arr, int left, int mid, int right)
+{
+    std::deque<int> temp;
+    int i = left;
+    int j = mid + 1;
+    
+    while (i <= mid && j <= right)
+    {
+        if (arr[i] <= arr[j])
+            temp.push_back(arr[i++]);
+        else
+            temp.push_back(arr[j++]);
+    }
+    while (i <= mid)
+        temp.push_back(arr[i++]);
+    
+    while (j <= right)
+        temp.push_back(arr[j++]);
+    for (size_t k = 0; k < temp.size(); ++k)
+        arr[left + k] = temp[k];
+}
+
+void PmergeMe::deqFordJohnsonRecursive(std::deque<int>& arr, int left, int right)
+{
+    if (right - left <= 16)
+    {
+        for (int i = left + 1; i <= right; ++i)
+        {
+            int key = arr[i];
+            int j = i - 1;
+            while (j >= left && arr[j] > key)
+            {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = key;
+        }
+        return;
+    }
+    
+    int mid = left + (right - left) / 2;
+    deqFordJohnsonRecursive(arr, left, mid);
+    deqFordJohnsonRecursive(arr, mid + 1, right);
+    deqMergeInsert(arr, left, mid, right);
+}
+
+void PmergeMe::deqFordJohnsonSort(std::deque<int>& arr)
 {
     if (arr.size() <= 1) return;
-    
-    std::deque<int> sorted;
-    sorted.push_back(arr[0]);
-    for (size_t i = 1; i < arr.size(); ++i)
-    {
-        insertIntoSorted(sorted, arr[i]);
-    }
-    arr = sorted;
+    deqFordJohnsonRecursive(arr, 0, arr.size() - 1);
 }
 
 
@@ -100,6 +179,7 @@ void PmergeMe::run(int ac, char** av)
         std::cerr << "Error" << std::endl;
         return;
     }
+    
     std::cout << "Before:";
     for (size_t i = 0; i < _vector.size() && i < 5; ++i)
         std::cout << " " << _vector[i];
@@ -111,14 +191,14 @@ void PmergeMe::run(int ac, char** av)
     std::deque<int> deqCopy = _deque;
     
     clock_t start = clock();
-    mergeInsertSort(vecCopy);
+    vecFordJohnsonSort(vecCopy);
     clock_t end = clock();
-    _vecTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
+    _vecTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000; // Convert to microseconds
     
     start = clock();
-    mergeInsertSort(deqCopy);
+    deqFordJohnsonSort(deqCopy);
     end = clock();
-    _deqTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
+    _deqTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000; // Convert to microseconds
     
     std::cout << "After:";
     for (size_t i = 0; i < vecCopy.size() && i < 5; ++i)

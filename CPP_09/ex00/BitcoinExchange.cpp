@@ -6,7 +6,7 @@
 /*   By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 23:27:28 by rcosta-c          #+#    #+#             */
-/*   Updated: 2025/06/03 10:39:29 by rcosta-c         ###   ########.fr       */
+/*   Updated: 2025/06/05 00:13:08 by rcosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange &copy) : _priceDatabase(c
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &copy)
 {
     if(this != &copy)
-        *this= copy;
+        _priceDatabase = copy._priceDatabase;
     return(*this);
 }
 

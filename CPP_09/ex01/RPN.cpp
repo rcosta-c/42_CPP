@@ -6,7 +6,7 @@
 /*   By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 23:27:09 by rcosta-c          #+#    #+#             */
-/*   Updated: 2025/06/02 23:27:10 by rcosta-c         ###   ########.fr       */
+/*   Updated: 2025/06/05 00:14:37 by rcosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ RPN::RPN(const RPN &copy) : _numbers(copy._numbers)
 RPN &RPN::operator=(const RPN &copy)
 {
     if(this != &copy)
-        *this= copy;
+        _numbers = copy._numbers;
     return(*this);
 }
 
