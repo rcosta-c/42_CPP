@@ -17,7 +17,7 @@ Memory Management: Stack vs Heap allocation, Smart pointers concepts, RAII princ
 Tools: Makefile compilation, debugging techniques, coding standards compliance
 
 # 📚 Module Breakdown
-CPP 00-01: Introduction to C++ syntax, classes, and basic OOP concepts /n
+CPP 00-01: Introduction to C++ syntax, classes, and basic OOP concepts
 CPP 02-03: Operator overloading, canonical form, and inheritance principles
 CPP 04: Polymorphism, abstract classes, and interface implementation
 CPP 05-06: Exception handling, form validation, and advanced class design
