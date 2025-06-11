@@ -6,7 +6,7 @@
 /*   By: rcosta-c <rcosta-c@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:47:55 by rcosta-c          #+#    #+#             */
-/*   Updated: 2025/06/05 00:11:00 by rcosta-c         ###   ########.fr       */
+/*   Updated: 2025/06/11 22:24:50 by rcosta-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,21 @@ PmergeMe::~PmergeMe()
 
 void PmergeMe::vecBinaryInsert(std::vector<int>& arr, int left, int right, int value)
 {
-    std::vector<int>::iterator pos = std::lower_bound(arr.begin() + left, arr.begin() + right, value);
-    arr.insert(pos, value);
+    int pos = left;
+    while (left <= right)
+    {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] > value)
+            right = mid - 1;
+        else
+        {
+            pos = mid + 1;
+            left = mid + 1;
+        }
+    }
+    for (int i = right + 1; i > pos; --i)
+        arr[i] = arr[i - 1];
+    arr[pos] = value;
 }
 
 void PmergeMe::vecMergeInsert(std::vector<int>& arr, int left, int mid, int right)
@@ -68,18 +81,11 @@ void PmergeMe::vecFordJohnsonRecursive(std::vector<int>& arr, int left, int righ
     {
         for (int i = left + 1; i <= right; ++i)
         {
-            int key = arr[i];
-            int j = i - 1;
-            while (j >= left && arr[j] > key)
-            {
-                arr[j + 1] = arr[j];
-                j--;
-            }
-            arr[j + 1] = key;
+            int value = arr[i];
+            vecBinaryInsert(arr, left, i - 1, value);
         }
         return;
     }
-    
     int mid = left + (right - left) / 2;
     vecFordJohnsonRecursive(arr, left, mid);
     vecFordJohnsonRecursive(arr, mid + 1, right);
@@ -88,16 +94,29 @@ void PmergeMe::vecFordJohnsonRecursive(std::vector<int>& arr, int left, int righ
 
 void PmergeMe::vecFordJohnsonSort(std::vector<int>& arr)
 {
-    if (arr.size() <= 1) return;
+    if (arr.size() <= 1)
+        return;
     vecFordJohnsonRecursive(arr, 0, arr.size() - 1);
 }
 
 
-
 void PmergeMe::deqBinaryInsert(std::deque<int>& arr, int left, int right, int value)
 {
-    std::deque<int>::iterator pos = std::lower_bound(arr.begin() + left, arr.begin() + right, value);
-    arr.insert(pos, value);
+    int pos = left;
+    while (left <= right)
+    {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] > value)
+            right = mid - 1;
+        else
+        {
+            pos = mid + 1;
+            left = mid + 1;
+        }
+    }
+    for (int i = right + 1; i > pos; --i)
+        arr[i] = arr[i - 1];
+    arr[pos] = value;
 }
 
 void PmergeMe::deqMergeInsert(std::deque<int>& arr, int left, int mid, int right)
@@ -128,14 +147,8 @@ void PmergeMe::deqFordJohnsonRecursive(std::deque<int>& arr, int left, int right
     {
         for (int i = left + 1; i <= right; ++i)
         {
-            int key = arr[i];
-            int j = i - 1;
-            while (j >= left && arr[j] > key)
-            {
-                arr[j + 1] = arr[j];
-                j--;
-            }
-            arr[j + 1] = key;
+            int value = arr[i];
+            deqBinaryInsert(arr, left, i - 1, value);
         }
         return;
     }
